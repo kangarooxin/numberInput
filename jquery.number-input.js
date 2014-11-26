@@ -11,38 +11,40 @@
  */
 ;(function($){
     $.fn.numberInput = function(options){
-        options = $.extend($.fn.numberInput.defaults, options);
+        var $opts = $.extend({}, $.fn.numberInput.defaults, options);
         function init(obj){
+            var $obj = $(obj);
+            var opts = $.meta ? $.extend({}, $opts, $obj.data()) : $opts;
             var $inputObj;
-            if(options.main_cell) {
-                $inputObj = $(options.main_cell, $(obj));
+            if(opts.main_cell) {
+                $inputObj = $(opts.main_cell, $obj);
             } else {
-                $inputObj = $(obj);
+                $inputObj = $obj;
             }
-            var max = $inputObj.attr(options.max_attr);
-            var min = $inputObj.attr(options.min_attr);
+            var max = $inputObj.attr(opts.max_attr);
+            var min = $inputObj.attr(opts.min_attr);
             initInput($inputObj, max, min);
-            if(options.minus_cell) {
-                var $minusBtn = $(options.minus_cell, $(obj));
+            if(opts.minus_cell) {
+                var $minusBtn = $(opts.minus_cell, $obj);
                 $minusBtn.click(function(){
-                    var val = parseInt($inputObj.val()) - options.step;
+                    var val = parseInt($inputObj.val()) - opts.step;
                     if($.isNumeric(min) && val >= min) {
                         $inputObj.val(val);
-                        if(options.callback) {
-                            options.callback($inputObj, val);
+                        if(opts.callback) {
+                            opts.callback($inputObj, val);
                         }
                     }
                     return false;
                 });
             }
-            if(options.incr_cell) {
-                var $incrBtn = $(options.incr_cell, $(obj));
+            if(opts.incr_cell) {
+                var $incrBtn = $(opts.incr_cell, $obj);
                 $incrBtn.click(function(){
-                    var val = parseInt($inputObj.val()) + options.step;
+                    var val = parseInt($inputObj.val()) + opts.step;
                     if($.isNumeric(max) && val <= max) {
                         $inputObj.val(val);
-                        if(options.callback) {
-                            options.callback($inputObj, val);
+                        if(opts.callback) {
+                            opts.callback($inputObj, val);
                         }
                     }
                     return false;
@@ -69,8 +71,8 @@
                     val = min;
                 }
                 $(this).val(val);
-                if(options.callback) {
-                    options.callback($obj, $(this).val());
+                if(opts.callback) {
+                    opts.callback($obj, $(this).val());
                 }
             }).css('imeMode', 'disabled').attr('autocomplete', 'off');
             if($.isNumeric(max) && max.length > 0) {
