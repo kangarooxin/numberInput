@@ -11,19 +11,21 @@
  */
 ;(function($){
     $.fn.numberInput = function(options){
-        var opts = $.extend({}, $.fn.numberInput.defaults, options);
+        var $opts = $.extend({}, $.fn.numberInput.defaults, options);
         function init(obj){
+            var $obj = $(obj);
+            var opts = $.meta ? $.extend({}, $opts, $obj.data()) : $opts;
             var $inputObj;
             if(opts.main_cell) {
-                $inputObj = $(opts.main_cell, $(obj));
+                $inputObj = $(opts.main_cell, $obj);
             } else {
-                $inputObj = $(obj);
+                $inputObj = $obj;
             }
             var max = $inputObj.attr(opts.max_attr);
             var min = $inputObj.attr(opts.min_attr);
             initInput($inputObj, max, min);
             if(opts.minus_cell) {
-                var $minusBtn = $(opts.minus_cell, $(obj));
+                var $minusBtn = $(opts.minus_cell, $obj);
                 $minusBtn.click(function(){
                     var val = parseInt($inputObj.val()) - opts.step;
                     if($.isNumeric(min) && val >= min) {
@@ -36,7 +38,7 @@
                 });
             }
             if(opts.incr_cell) {
-                var $incrBtn = $(opts.incr_cell, $(obj));
+                var $incrBtn = $(opts.incr_cell, $obj);
                 $incrBtn.click(function(){
                     var val = parseInt($inputObj.val()) + opts.step;
                     if($.isNumeric(max) && val <= max) {
