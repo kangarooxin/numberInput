@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .numberInput {
+            width: 132px;
+            height: 28px;
+            float: left;
+            border: 1px solid #dfdfdf;
+        }
+        .numberInput a {
+            text-decoration: none;
+            display: inline-block;
+            float: left;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            color: #6d6d6d;
+            background: #fafafa;
+            text-align: center;
+        }
+        .numberInput a:hover {
+            background: #d7d7d7;
+        }
+        .numberInput input {
+            float: left;
+            width: 74px;
+            height: 28px;
+            line-height: 28px;
+            padding: 0;
+            border: none;
+            border-left: 1px solid #dfdfdf;
+            border-right: 1px solid #dfdfdf;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="numberInput">
+        <a href="javascript:void(0)" class="minus">-</a>
+        <input type="text" value="1" min="1" max="99" size="4"/>
+        <a href="javascript:void(0)" class="incr">+</a>
+    </div>
+    <div class="numberInput">
+        <a href="javascript:void(0)" class="minus">-</a>
+        <input type="text" value="1" min="1" max="99" size="4"/>
+        <a href="javascript:void(0)" class="incr">+</a>
+    </div>
+    <span id="number"></span>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.number-input.js"></script>
+    <script>
+        $(function(){
+            $('.numberInput:eq(0)').numberInput();
+            $('.numberInput:eq(1)').numberInput({
+                callback: function($ele, val) {
+                   $('#number').text(val);
+                },
+                step: 2
+            });
+        });
+    </script>
+</body>
+</html>
+
