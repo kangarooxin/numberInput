@@ -3,6 +3,9 @@ numberInput
 
 init a text as a number input, with minus and increment button
 
+For **demo**, usage, and examples, see:
+http://kangarooxin.github.io/numberInput/
+
 
 ### Useage:
 ```html
