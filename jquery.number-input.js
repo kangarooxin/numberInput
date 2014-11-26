@@ -1,4 +1,15 @@
-(function($){
+/*!
+ * jQuery Number Input Plugin v0.1.0
+ *
+ * Copyright 2014
+ *
+ * @author Pangxin
+ * @mail   pangxin001@163.com
+ *
+ * $('.numberInput').numberInput();
+ *
+ */
+;(function($){
     $.fn.numberInput = function(options){
         options = $.extend($.fn.numberInput.defaults, options);
         function init(obj){
