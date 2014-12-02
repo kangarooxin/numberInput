@@ -21,13 +21,12 @@
             } else {
                 $inputObj = $obj;
             }
-            var max = $inputObj.attr(opts.max_attr);
-            var min = $inputObj.attr(opts.min_attr);
-            initInput($inputObj, max, min);
+            initInput($inputObj);
             if(opts.minus_cell) {
                 var $minusBtn = $(opts.minus_cell, $obj);
                 $minusBtn.click(function(){
                     var val = parseInt($inputObj.val()) - opts.step;
+                    var min = $inputObj.attr(opts.min_attr);
                     if($.isNumeric(min) && val >= min) {
                         $inputObj.val(val);
                         if(opts.callback) {
@@ -41,6 +40,7 @@
                 var $incrBtn = $(opts.incr_cell, $obj);
                 $incrBtn.click(function(){
                     var val = parseInt($inputObj.val()) + opts.step;
+                    var max = $inputObj.attr(opts.max_attr);
                     if($.isNumeric(max) && val <= max) {
                         $inputObj.val(val);
                         if(opts.callback) {
@@ -65,6 +65,8 @@
             }).blur(function(){
                 var val = $(this).val();
                 val = val.replace(/\D|^0/g,'');
+                var max = $(this).attr(opts.max_attr);
+                var min = $(this).attr(opts.min_attr);
                 if($.isNumeric(max) && val > max) {
                     val = max;
                 } else if($.isNumeric(min) && val < min) {
