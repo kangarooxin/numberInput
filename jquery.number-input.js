@@ -28,8 +28,14 @@
                 var $minusBtn = $(opts.minus_cell, $obj);
                 $minusBtn.click(function(){
                     var val = parseInt($inputObj.val()) - opts.step;
-                    if($.isNumeric(min) && val >= min) {
+                    if(!$.isNumeric(min) || val >= min) {
                         $inputObj.val(val);
+                        if($.isNumeric(min) && val == min) {
+                            $minusBtn.addClass(opts.disable_calss);
+                        }
+                        if($.isNumeric(max) && val < max && opts.incr_cell) {
+                            $(opts.incr_cell, $obj).removeClass(opts.disable_calss);
+                        }
                         if(opts.callback) {
                             opts.callback($inputObj, val);
                         }
@@ -41,8 +47,14 @@
                 var $incrBtn = $(opts.incr_cell, $obj);
                 $incrBtn.click(function(){
                     var val = parseInt($inputObj.val()) + opts.step;
-                    if($.isNumeric(max) && val <= max) {
+                    if(!$.isNumeric(max) || val <= max) {
                         $inputObj.val(val);
+                        if($.isNumeric(min) && val > min && opts.minus_cell) {
+                            $(opts.minus_cell, $obj).removeClass(opts.disable_calss);
+                        }
+                        if($.isNumeric(max) && val == max) {
+                            $incrBtn.addClass(opts.disable_calss);
+                        }
                         if(opts.callback) {
                             opts.callback($inputObj, val);
                         }
@@ -71,8 +83,8 @@
                     val = min;
                 }
                 $(this).val(val);
-                if(opts.callback) {
-                    opts.callback($obj, $(this).val());
+                if($opts.callback) {
+                    $opts.callback($obj, $(this).val());
                 }
             }).css('imeMode', 'disabled').attr('autocomplete', 'off');
             if($.isNumeric(max) && max.length > 0) {
@@ -90,6 +102,7 @@
         main_cell: 'input',
         minus_cell: '.minus',
         incr_cell: '.incr',
+        disable_calss: 'disable',
         callback: 0,
         step: 1
     };
