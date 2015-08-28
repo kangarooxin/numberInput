@@ -76,7 +76,7 @@
                 $(this).val($(this).val().replace(/\D|^0/g,''));
             }).blur(function(){
                 var val = $(this).val();
-                val = val.replace(/\D|^0/g,'');
+                val = parseInt(val.replace(/\D|^0/g,''));
                 var max = $(this).attr(opts.max_attr);
                 var min = $(this).attr(opts.min_attr);
                 if($.isNumeric(max) && val > max) {
