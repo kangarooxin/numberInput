@@ -11,10 +11,10 @@
  */
 ;(function($){
     $.fn.numberInput = function(options){
-        var $opts = $.extend({}, $.fn.numberInput.defaults, options);
+        var options = $.extend({}, $.fn.numberInput.defaults, options);
         function init(obj){
             var $obj = $(obj);
-            var opts = $.meta ? $.extend({}, $opts, $obj.data()) : $opts;
+            var opts = $.metadata ? $.extend({}, options, $obj.metadata()) : options;
             var $inputObj;
             if(opts.main_cell) {
                 $inputObj = $(opts.main_cell, $obj);
